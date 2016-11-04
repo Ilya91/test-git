@@ -13,34 +13,28 @@ if($v->validate()) {
     // Errors
     print_r($v->errors());
 }
-
-
+$output = 'Пользователь '.$_POST['name'].' оставил сообщение:<br/>';
+$output.= "<p>".$_POST['content'].'</p><br/>';
+$output.= "E-mail отправителя: ".$_POST['email'];
 $mail = new PHPMailer;
 
-//$mail->SMTPDebug = 3;                               // Enable verbose debug output
-
-$mail->isSMTP();                                      // Set mailer to use SMTP
-$mail->Host = 'smtp1.example.com;smtp2.example.com';  // Specify main and backup SMTP servers
-$mail->SMTPAuth = true;                               // Enable SMTP authentication
-$mail->Username = 'user@example.com';                 // SMTP username
-$mail->Password = 'secret';                           // SMTP password
+$mail->IsSMTP();
+$mail->SMTPAuth   = true;
+$mail->Host       = "smtp.yandex.ru";
+$mail->Username   = "mironchikov1991@yandex.ru";
+$mail->Password ='386met78';
 $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 587;                                    // TCP port to connect to
 
-$mail->setFrom('from@example.com', 'Mailer');
-$mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
-$mail->addAddress('ellen@example.com');               // Name is optional
-$mail->addReplyTo('info@example.com', 'Information');
-$mail->addCC('cc@example.com');
-$mail->addBCC('bcc@example.com');
-
-$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+$mail->setFrom('mironchikov1991@yandex.ru', 'E-mail с сайта');
+$mail->addAddress('webmaster.1991@mail.ru', 'Получатель');     // Add a recipient
+$mail->addCC($_POST['email'], $_POST['name']);
+$mail->addReplyTo('mironchikov1991@yandex.ru', 'Robot');
+$mail->CharSet = 'UTF-8';
 $mail->isHTML(true);                                  // Set email format to HTML
-
-$mail->Subject = 'Here is the subject';
-$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+$mail->Subject = 'Письмо с сайта '.date('d.m.Y H:i:s',time());
+$mail->Body    = $output;
+$mail->AltBody = $output;
 
 if(!$mail->send()) {
     echo 'Message could not be sent.';
