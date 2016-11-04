@@ -6,6 +6,28 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitfa3fd25db5c5c6231963a83d2c5e12c6
 {
+    public static $prefixLengthsPsr4 = array (
+        'R' => 
+        array (
+            'ReCaptcha\\' => 10,
+        ),
+        'F' => 
+        array (
+            'Faker\\' => 6,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'ReCaptcha\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
+        ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
+        ),
+    );
+
     public static $prefixesPsr0 = array (
         'V' => 
         array (
@@ -30,6 +52,8 @@ class ComposerStaticInitfa3fd25db5c5c6231963a83d2c5e12c6
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInitfa3fd25db5c5c6231963a83d2c5e12c6::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitfa3fd25db5c5c6231963a83d2c5e12c6::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInitfa3fd25db5c5c6231963a83d2c5e12c6::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitfa3fd25db5c5c6231963a83d2c5e12c6::$classMap;
 
