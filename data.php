@@ -56,3 +56,17 @@ $connection->query('SET NAMES "UTF-8"');
      }
  }
 
+// echo 'Добавлено пользователей '.$countUsers.'<br>';
+// echo 'Добавлено контактов '.$countContacts.'<br>';
+
+ $sql = 'SELECT * FROM `users` ';
+ $result = $connection->query($sql);
+ $records = $result->fetch_all(MYSQLI_ASSOC);
+ // echo '<pre>'.print_r($records,true).'</pre>';
+ echo tab($records);
+
+ $sql = 'SELECT * FROM `contacts` ';
+ $result = $connection->query($sql);
+ $records = $result->fetch_all(MYSQLI_ASSOC);
+ // echo '<pre>'.print_r($records,true).'</pre>';
+ echo tab($records);
